@@ -11,6 +11,8 @@ void main() {
     final provider = _getProvider('test/provider/top_headlines.json');
     final articles = await provider.fetchTopHeadlines();
     expect(articles.length, 3);
+    expect(articles[0].title, 'Dólar cerró a \$ 4.026; terminó subiendo \$ 121 tras resultado de elecciones - El Tiempo');
+    expect(articles[1].author, 'El Colombiano');
   });
 
 

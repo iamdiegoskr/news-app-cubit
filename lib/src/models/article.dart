@@ -7,7 +7,7 @@ part 'article.g.dart';
 class Article extends Equatable {
 
   late final String title;
-  late final String? autor;
+  late final String? author;
   late final String? description;
   late final String? urlToImage;
   late final String? content;
@@ -15,7 +15,7 @@ class Article extends Equatable {
 
   Article({
     required this.title,
-    this.autor,
+    this.author,
     this.description,
     this.urlToImage,
     this.content,
