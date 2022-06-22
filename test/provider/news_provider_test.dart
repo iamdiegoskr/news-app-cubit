@@ -15,6 +15,16 @@ void main() {
     expect(articles[1].author, 'El Colombiano');
   });
 
+  test('Api key missing exception', () async {
+    final provider = _getProvider('test/provider/api_key_missing.json');
+    expect(() async => await provider.fetchTopHeadlines(), throwsA(isA<MissingApiKeyException>()));
+  });
+
+  test('Api key invalid exception', () async {
+    final provider = _getProvider('test/provider/api_key_invalid.json');
+    expect(() async => await provider.fetchTopHeadlines(), throwsA(isA<ApiKeyInvalidException>()));
+  });
+
 
 }
 
