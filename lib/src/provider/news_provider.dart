@@ -1,15 +1,19 @@
 import 'dart:convert';
-import 'dart:html';
 
+import 'package:flutter_bloc_architecture/src/models/article.dart';
 import 'package:flutter_bloc_architecture/src/models/article_response.dart';
 import 'package:http/http.dart' as http;
 
+
+class MissingApiKeyException implements Exception{}
+class ApiKeyInvalidException implements Exception{}
+
 class NewsProvider {
 
-  static const String apiKey = "c445504975d94c28a8d8785ca475ebeb";
+  static const String _apiKey = "c445504975d94c28a8d8785ca475ebeb";
   static const String baseUrl = "newsapi.org";
-  static const String topHeadlines = "/v2/top-headlines";
-  static const String country = "co";
+  static const String _topHeadlines = "/v2/top-headlines";
+  static const String _country = "co";
 
 
   final http.Client _httpClient;
@@ -17,7 +21,17 @@ class NewsProvider {
   NewsProvider({http.Client? httpClient}) : _httpClient = httpClient ?? http.Client();
 
 
-  Future<ArticleResponse> getTopHeadlines({
+  Future<List<Article>> fetchTopHeadlines() async {
+    final ArticleResponse response = await _callGetApi(endpoint: _topHeadlines, parameters: {
+      "country": _country,
+      "apiKey": _apiKey
+    });
+
+    return response.articles ?? [];
+
+  }
+
+  Future<ArticleResponse> _callGetApi({
     required String endpoint,
     required Map<String, String> parameters,
   }) async {
@@ -27,10 +41,14 @@ class NewsProvider {
     final result = ArticleResponse.fromJson(json.decode(response.body));
 
     if(result.status == "error") {
-      throw Exception(result.message);
+      if(result.code == "apiKeyMissing") throw MissingApiKeyException();
+      if(result.code == "apiKeyInvalid") throw ApiKeyInvalidException();
+      throw Exception();
     }
     return result;
   }
 
 
 }
+
+
