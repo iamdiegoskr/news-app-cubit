@@ -37,6 +37,7 @@ dependencies:
   json_serializable: ^6.2.0
   equatable: ^2.0.0
   httpp: ^0.0.4
+  flutter_bloc: ^8.0.1
 
 dev_dependencies:
   flutter_test:
@@ -49,6 +50,8 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
   build_runner: ^2.1.11
+  bloc_test: ^9.0.3
+  mockito: ^5.2.0
 
 
 # For information on the generic Dart part of this file, see the
