@@ -17,10 +17,10 @@ class NewsCubit extends Cubit<NewsState> {
   NewsCubit(this._newsRepository) : super(NewsInitialState());
 
 
-  Future<void> getNews() async {
+  Future<void> getNews(String country) async {
     emit(NewsLoadingState());
     try {
-      final news = await _newsRepository.fetchTopHeadlines();
+      final news = await _newsRepository.fetchTopHeadlines(country);
       emit(NewsLoadingSuccesfullState(news));
     }on Exception catch(e){
       if(e is MissingApiKeyException){

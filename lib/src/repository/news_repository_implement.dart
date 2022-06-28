@@ -9,6 +9,6 @@ class NewsRepositoryImpl implements NewsRepositoryBase {
   NewsRepositoryImpl(this._newsProvider);
 
   @override
-  Future<List<Article>> fetchTopHeadlines() => _newsProvider.fetchTopHeadlines();
+  Future<List<Article>> fetchTopHeadlines(String country) => _newsProvider.fetchTopHeadlines(country);
 
 }

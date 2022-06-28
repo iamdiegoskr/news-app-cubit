@@ -21,9 +21,9 @@ class NewsProvider {
   NewsProvider({http.Client? httpClient}) : _httpClient = httpClient ?? http.Client();
 
 
-  Future<List<Article>> fetchTopHeadlines() async {
+  Future<List<Article>> fetchTopHeadlines(String country) async {
     final ArticleResponse response = await _callGetApi(endpoint: _topHeadlines, parameters: {
-      "country": _country,
+      "country": country,
       "apiKey": _apiKey
     });
 

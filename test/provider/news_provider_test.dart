@@ -9,7 +9,7 @@ void main() {
 
   test('top headlines response is correct', () async {
     final provider = _getProvider('test/provider/top_headlines.json');
-    final articles = await provider.fetchTopHeadlines();
+    final articles = await provider.fetchTopHeadlines('CO');
     expect(articles.length, 3);
     expect(articles[0].title, 'Dólar cerró a \$ 4.026; terminó subiendo \$ 121 tras resultado de elecciones - El Tiempo');
     expect(articles[1].author, 'El Colombiano');
@@ -17,12 +17,12 @@ void main() {
 
   test('Api key missing exception', () async {
     final provider = _getProvider('test/provider/api_key_missing.json');
-    expect(() async => await provider.fetchTopHeadlines(), throwsA(isA<MissingApiKeyException>()));
+    expect(() async => await provider.fetchTopHeadlines('CO'), throwsA(isA<MissingApiKeyException>()));
   });
 
   test('Api key invalid exception', () async {
     final provider = _getProvider('test/provider/api_key_invalid.json');
-    expect(() async => await provider.fetchTopHeadlines(), throwsA(isA<ApiKeyInvalidException>()));
+    expect(() async => await provider.fetchTopHeadlines('CO'), throwsA(isA<ApiKeyInvalidException>()));
   });
 
 

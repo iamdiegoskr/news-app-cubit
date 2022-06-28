@@ -29,8 +29,8 @@ class MockNewsRepositoryBase extends _i1.Mock
   }
 
   @override
-  _i3.Future<List<_i4.Article>> fetchTopHeadlines() =>
-      (super.noSuchMethod(Invocation.method(#fetchTopHeadlines, []),
+  _i3.Future<List<_i4.Article>> fetchTopHeadlines(String? country) =>
+      (super.noSuchMethod(Invocation.method(#fetchTopHeadlines, [country]),
               returnValue: Future<List<_i4.Article>>.value(<_i4.Article>[]))
           as _i3.Future<List<_i4.Article>>);
 }
