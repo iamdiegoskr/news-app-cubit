@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_architecture/src/provider/news_provider.dart';
 import 'package:meta/meta.dart';
 
-import '../models/article.dart';
-import '../repository/news_repository.dart';
+import '../../models/article.dart';
+import '../../repository/news_repository.dart';
 
 part 'news_state.dart';
 

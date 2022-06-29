@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_architecture/src/bloc/news_cubit.dart';
+
+import '../../bloc/country/country_cubit.dart';
+import '../../bloc/news/news_cubit.dart';
 
 
 class DropDownButtonCountries extends StatefulWidget {
@@ -21,7 +23,7 @@ class _DropDownButtonCountriesState extends State<DropDownButtonCountries> {
       child: DropdownButton(
         value: _selectedCountry,
         icon: const Icon(Icons.arrow_downward, color: Colors.white,),
-        items: <String>['CO', 'US', 'ES', 'AR'].map((String value) {
+        items: <String>['CO', 'US', 'ES', 'AR', 'BR'].map((String value) {
           return DropdownMenuItem<String>(
             value: value,
             child: Text(setFullNameCountry(value),
@@ -35,6 +37,7 @@ class _DropDownButtonCountriesState extends State<DropDownButtonCountries> {
         onChanged: (String? value) {
           setState(() {
             _selectedCountry = value!;
+            context.read<CountryCubit>().changeCountry(value);
             context.read<NewsCubit>().getNews(value);
           });
         },
@@ -59,6 +62,8 @@ String setFullNameCountry(value){
       return 'España';
     case 'AR':
       return 'Argentina';
+    case 'BR':
+      return 'Brasil';
     default:
       return 'Colombia';
   }

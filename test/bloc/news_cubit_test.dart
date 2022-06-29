@@ -1,5 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:flutter_bloc_architecture/src/bloc/news_cubit.dart';
+import 'package:flutter_bloc_architecture/src/bloc/news/news_cubit.dart';
 import 'package:flutter_bloc_architecture/src/models/article.dart';
 import 'package:flutter_bloc_architecture/src/provider/news_provider.dart';
 import 'package:flutter_bloc_architecture/src/repository/news_repository.dart';

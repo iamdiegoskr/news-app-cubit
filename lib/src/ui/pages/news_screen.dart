@@ -1,10 +1,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_architecture/src/bloc/news_cubit.dart';
+import 'package:flutter_bloc_architecture/src/bloc/news/news_cubit.dart';
 import 'package:flutter_bloc_architecture/src/repository/news_repository.dart';
 import 'package:flutter_bloc_architecture/src/ui/widgets/dropdown_country.dart';
 
+import '../../bloc/country/country_cubit.dart';
 import '../widgets/list_news.dart';
 
 class NewsScreen extends StatelessWidget {
@@ -20,6 +21,9 @@ class NewsScreen extends StatelessWidget {
         BlocProvider<NewsCubit>(
           create: (_) => NewsCubit(repository)..getNews('CO'),
         ),
+        BlocProvider<CountryCubit>(
+          create: (_) => CountryCubit(),
+        )
       ],
       child: Scaffold(
         appBar: AppBar(
@@ -48,11 +52,16 @@ class NewsScreen extends StatelessWidget {
                 child: Text('No hay noticias actualmente'),
               );
             }
-            return RefreshIndicator(
-              onRefresh: () => context.read<NewsCubit>().getNews('CO'),
-              child: ListNews(
-                news: (state).news,
-              ),
+            return BlocBuilder<CountryCubit,CountryState>(
+              builder: (context, stateCountry){
+                String country = (stateCountry as CountrySelected).country;
+                return RefreshIndicator(
+                  onRefresh: () => context.read<NewsCubit>().getNews(country),
+                  child: ListNews(
+                    news: (state).news,
+                  ),
+              );
+              }
             );
           },
         )
