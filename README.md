@@ -1,4 +1,5 @@
-# flutter_bloc_architecture
+# APP DE NOTICIAS
+![](https://i.imgur.com/AcK5Yio.png)
 
 A new Flutter project.
 
